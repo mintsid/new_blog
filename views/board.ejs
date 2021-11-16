@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+  <title>Document</title>
+  <style>
+    table{
+      width: 100%;
+      border-top: 1px solid #444444;
+      border-collapse: collapse;
+    }
+
+    th, td {
+    border-bottom: 1px solid #444444;
+    
+    padding: 10px;
+    }
+    
+    .button{
+      margin-bottom: 30px;
+    }
+  </style>
+  
+  <script>
+
+    $(document).ready(function () {
+      show_board();
+      });
+
+   
+    function show_board(){
+      $.ajax({
+        type: "GET",
+        url: `/api/board`,
+        data: {},
+        success: function(response){
+         let board = response["board"]
+         let date = moment(board[i]['date']).format('YYYY-MM-DD HH:mm')
+          for (let i=0; i<board.length; i++){
+            let title = board[i]['title']
+            let author = board[i]['author']
+            let date = board[i]['date']
+
+            let temp_html =`<tr>
+                              <td>${title}</td>
+                              <td>${author}</td>
+                              <td>${date}</td>
+                            </tr>`
+
+                $('#board-table').append(temp_html)
+              
+          }
+        }
+      })
+    }
+    
+    {
+      
+    }
+    
+
+  </script>
+</head>
+<body>
+  <div>
+    <button>글쓰기</button> 
+  </div>
+  <div>
+    <table id="board-table">
+      <tbody>
+       <tr>
+         <td>제목</td>
+         <td>작성자</td>
+         <td>작성일</td>
+       </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
