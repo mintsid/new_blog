@@ -21,11 +21,6 @@ const boardSchema = new Schema({
       required: true,
       
     },
-    // number:{
-    //   type: String,
-    //   required: true,
-    //   unique: true,
-    // },
     contents:{
       type: String,
       required: true,

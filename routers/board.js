@@ -22,13 +22,15 @@ router.get("/board/:boardId", async (req, res) => {
   res.json({ detail: board });
 });
 
-//저장
-router.post('/board/:boardId', async (req, res) => {
+//작성
+router.post('/board', async (req, res) => {
   const { title, author, password, contents, date } = req.body;
-  isExist = await borders.find({ boardId });
+  isExist = await Board.find({ title });
   if (isExist.length == 0) {
-    await board.create({title, author, password, contents, date });
+    await Board.create({title, author, password, contents, date });
   }
   res.send({ result: "success" });
 });
+
+
 module.exports = router;
