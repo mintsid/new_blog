@@ -17,7 +17,7 @@ router.get("/board", async (req, res, next) => {
 //상세 페이지 조회
 router.get("/board/:boardId", async (req, res) => {
   const { boardId } = req.params;
-  board = await Board.findOne({ boardId: boardId });
+  board = await Board.findOne({ Id: boardId });
   res.json({ detail: board });
 });
 
