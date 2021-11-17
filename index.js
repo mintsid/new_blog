@@ -23,7 +23,7 @@ app.get('/test', (req, res) => {
   res.render('test', {name});
 })
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
   res.render('board');
 })
 

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--jqueryimport-->  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
   integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -41,19 +42,19 @@
         data: {},
         success: function(response){
          let board = response["board"]
-         
+        
           for (let i=0; i<board.length; i++){
             let title = board[i]['title']
             let author = board[i]['author']
             let date = new Date(board[i]['date']).toLocaleString()
             
-            console.log(title)
+            
             let temp_html =`<tr>
-                              <td><a href='/board?title=${board[i]["title"]}'>${title}</a></td>
+                              <td><a href='/detail?title=${board[i]["title"]}'>${title}</a></td>
                               <td>${author}</td>
                               <td>${date}</td>
                             </tr>`
-
+//뻘짓했네..ㅎㅎ 망할 
                 $('#board-table').append(temp_html)
               
           }
@@ -61,10 +62,7 @@
       })
     }
     
-    {
-      
-    }
-    
+
 
   </script>
 </head>

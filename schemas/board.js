@@ -5,7 +5,7 @@ const boardSchema = new Schema({
     title: {
         type: String,
         required: true,
-        unique: true
+        
     },
     password: {
         type: String,
@@ -17,19 +17,19 @@ const boardSchema = new Schema({
       required: true,
     },
     date: {
-      type: String,
+      type: Date,
       required: true,
-      unique: true
+      
     },
-    number:{
-      type: String,
-      required: true,
-      unique: true,
-    },
+    // number:{
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    // },
     contents:{
       type: String,
       required: true,
-      unique: true,
+     
     }
 });
 
