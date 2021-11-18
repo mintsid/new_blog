@@ -35,6 +35,10 @@ app.get('/detail', (req, res) => {
   res.render('detail');
 })
 
+app.get('/rewrite', (req, res) => {
+  res.render('rewrite');
+})
+
 
 app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`)

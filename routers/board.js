@@ -6,10 +6,11 @@ const router = express.Router();
 //상세 페이지 조회
 router.get("/board/:boardId", async (req, res) => {
   const { boardId } = req.params;
-  console.log(req.params);
   board = await Board.findById(boardId);
+  
   /**
    * 내 생각에는 모든 도큐먼트의 보드아이디가 전부 하나로 통일되어 있음
+   * findbyid로 개별 id 가져옴
    * 
    */
   res.json({ detail: board });
@@ -29,8 +30,7 @@ router.get("/board", async (req, res, next) => {
 });
 
 
-
-//작성
+//저장
 router.post('/board', async (req, res) => {
   const { title, author, password, contents, date } = req.body;
   isExist = await Board.find({ title });
@@ -40,5 +40,15 @@ router.post('/board', async (req, res) => {
   res.send({ result: "success" });
 });
 
+//수정
+router.patch("/board/:/boardId", async (req, res) => {
+  const { boardId } = req.params;
+  const {title, author, contents } = req.body;
+  isBoard = await Board.find({ boardId });
+  if (isBoard.length) {
+    await Board.updateOne({ boardId }, { $set: { title, author, contents } });
+  }
+  res.send({ result: "success" });
+})
 
 module.exports = router;
