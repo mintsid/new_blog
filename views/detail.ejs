@@ -16,7 +16,7 @@
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const boardId = urlParams.get("boardId"); 
-
+      console.log(boardId)
      $(document).ready(function(){
         get_detail();
      })
@@ -28,7 +28,7 @@
               data: {},
               success: function(response){
                 let boardDetail = response["detail"]
-                console.log(boardDetail)
+                
                 $("#title").text(boardDetail["title"]);
                 $("#author").text(boardDetail["author"]);
                 $("#contents").text(boardDetail["contents"]);
