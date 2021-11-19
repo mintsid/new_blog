@@ -21,6 +21,7 @@
      })
      //상세페이지 보여주기
       function get_detail(){
+        $("#board").empty();
           $.ajax({
              type: "GET",
               url: `/api/board/${boardId}`,
