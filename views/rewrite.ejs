@@ -68,20 +68,17 @@
           type: "DELETE",
           url: `/api/board/${boardId}`,
           data: {
-            'passoword' : password
+            'password' : password,
           },
           success: function(response) {
-            if (response["resutl"]== "success") {
+            console.log(response)
+            if (response["result"]== "success") { //오타 수정
               alert('삭제되었습니다.') 
-
               window.location.href="/"
             }else {
               alert('비번 확인요망 ㅇㅇ')
             }
-
-
             }
-          
         })
       }
      
