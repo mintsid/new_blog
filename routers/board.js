@@ -48,10 +48,10 @@ router.patch("/board/:boardId", async (req, res) => {
 
   if (board.password === password) {
     await Board.updateOne(
-      { _id: boardId }, // 여기 수정했는데 왜지..
+      { _id: boardId }, // _id: =>이거추가했는데 됀다..?? 이유는 모르겠다...
       { $set: { title, author, contents } }
     );
-    console.log(board);
+
     res.send({ result: "success" });
   } else {
     res.send({ result: "fail" });
@@ -61,13 +61,14 @@ router.patch("/board/:boardId", async (req, res) => {
 //삭제
 router.delete("/board/:boardId", async (req, res) => {
   const { boardId } = req.params;
-  const board = await Board.find({ boardId });
-  //board = await Board.updateOne({ boardId }); // 여기가 문제 날리니 괜찮은데 다른게 튀어나오네..?
+  const { password } = req.body;
 
-  if (board.length > 0) {
+  const board = await Board.findOne({ _id: boardId });
+  if (board["password"] == password) {
     await Board.deleteOne({ _id: boardId });
-
     res.send({ result: "success" });
+  } else {
+    res.send({ result: "fail" });
   }
 });
 
