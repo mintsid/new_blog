@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--jqueryimport-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function login() {
+        let nickname = $("#nickname").val();
+        let password = $("#password").val();
+
+        $.ajax({
+          type: "POST",
+          url: `/api/user`,
+          data: {
+            nickname: nickname,
+            password: password1,
+          },
+          success: function (response) {
+            if (response.result == "success") {
+              alert("확인완료");
+              window.location.href = "/board";
+            } else {
+              alert("오타확인좀 ");
+            }
+          },
+        });
+      }
+    </script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <label>닉네임</label><input type="text" id="nickname" />
+      <span> 비밀번호: <input type="text" id="password" /></span>
+
+      <p><button onclick="">로그인</button></p>
+      <button onclick="location.href='/join';">회원가입</button>
+    </div>
+  </body>
+</html>

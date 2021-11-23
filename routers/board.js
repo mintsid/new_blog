@@ -9,7 +9,7 @@ router.get("/board/:boardId", async (req, res) => {
   board = await Board.findById(boardId);
 
   /**
-   * 내 생각에는 모든 도큐먼트의 보드아이디가 전부 하나로 통일되어 있음
+   *
    * findbyid로 개별 id 가져옴
    *
    */
@@ -72,4 +72,37 @@ router.delete("/board/:boardId", async (req, res) => {
   }
 });
 
+//회원가입
+// router.post("/user", async (req, res) => {
+//   try {
+//     const { email, password1, password2 } = req.body;
+
+//     if (password1 !== password2) {
+//       res.send({ result: "fail" });
+//     } else {
+//       await User.create({ email, password1, password2 });
+//     }
+//     res.send({ result: "success" });
+//   } catch (err) {
+//     console.error(err);
+//     netx();
+//   }
+// });
+
+// //로그인
+// const jwt = require("jsonwebtoken");
+// router.put("/user", async (req, res) => {
+//   const user = await user.findOne({ email });
+
+//   if (!user || passowrd !== user.password) {
+//     res.status(400).send({
+//       errorMessage: "이메일 또는 비밀번호가 틀려습니다.",
+//     });
+//     return;
+//   }
+
+//   res.send({
+//     token: jwt.sign({ userId: user.userId }, "my-secret-key"),
+//   });
+// });
 module.exports = router;

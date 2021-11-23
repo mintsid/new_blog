@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--jqueryimport-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      function join() {
+        let nickname = $("#nickname").val();
+        let password = $("#password").val();
+        let password1 = $("#password1").val();
+
+        if (password !== password1) {
+          alert("패스워드가 일치하지 않습니다.");
+          return;
+        }
+
+        $.ajax({
+          type: "POST",
+          url: `/api/user`,
+          data: {
+            nickname: nickname,
+            password: password,
+            password1: password1,
+          },
+          success: function (response) {
+            if (response.result == "success") {
+              alert("가입완료");
+              // window.location.href = "/";
+            } else {
+              alert("이미 사용중인 닉네임입니다.");
+            }
+          },
+        });
+      }
+    </script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <p><label>닉네임:</label><input type="text" id="nickname" /></p>
+    <p>
+      <span> 비밀번호: <input type="text" id="password" /></span>
+    </p>
+    <p><label>비밀번호 확인:</label><input type="text" id="password1" /></p>
+    <button onclick="join()">가입하기</button>
+  </body>
+</html>
