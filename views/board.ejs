@@ -33,6 +33,16 @@
 
     <script>
       $(document).ready(function () {
+        // 토큰이 있을 경우 로그인 기능 hide
+        if (localStorage.getItem("token")) {
+          getSelf(function () {
+            $("#logout").show();
+            $("#login").hide();
+          });
+        } else {
+          // 토큰이 없을 경우 게시글 작성 hide
+          $("#post").hide();
+        }
         show_board();
       });
 
@@ -60,12 +70,19 @@
           },
         });
       }
+
+      function logout() {
+        localStorage.clear();
+        alert("안녕!");
+        window.location.href = "/";
+      }
     </script>
   </head>
   <body>
     <div>
-      <button onclick="location.href='/write';">글쓰기</button>
-      <button onclick="location.href='/login';">로그인</button>
+      <button onclick="location.href='/write';" id="post">글쓰기</button>
+      <button onclick="location.href='/login';" id="login">로그인</button>
+      <button onclick="logout()" id="logout">로그아웃</button>
     </div>
     <div>
       <table id="board-table">

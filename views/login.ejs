@@ -20,12 +20,12 @@
           url: `/api/user`,
           data: {
             nickname: nickname,
-            password: password1,
+            password: password,
           },
           success: function (response) {
             if (response.result == "success") {
               alert("확인완료");
-              window.location.href = "/board";
+              location.href = "/";
             } else {
               alert("오타확인좀 ");
             }
@@ -40,7 +40,7 @@
       <label>닉네임</label><input type="text" id="nickname" />
       <span> 비밀번호: <input type="text" id="password" /></span>
 
-      <p><button onclick="">로그인</button></p>
+      <p><button onclick=" login()">로그인</button></p>
       <button onclick="location.href='/join';">회원가입</button>
     </div>
   </body>

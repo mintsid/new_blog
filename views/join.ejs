@@ -23,7 +23,7 @@
         }
 
         $.ajax({
-          type: "POST",
+          type: "post",
           url: `/api/user`,
           data: {
             nickname: nickname,
@@ -31,11 +31,11 @@
             password1: password1,
           },
           success: function (response) {
-            if (response.result == "success") {
+            if (response["result"] == "success") {
               alert("가입완료");
-              // window.location.href = "/";
+              window.location.href = "/login";
             } else {
-              alert("이미 사용중인 닉네임입니다.");
+              alert("이미 사용중입니다.");
             }
           },
         });

@@ -1,6 +1,6 @@
 const express = require("express");
 const Board = require("../schemas/board");
-
+const User = require("../schemas/user");
 const router = express.Router();
 
 //상세 페이지 조회
@@ -33,6 +33,7 @@ router.get("/board", async (req, res, next) => {
 router.post("/board", async (req, res) => {
   const { title, author, password, contents, date } = req.body;
   isExist = await Board.find({ title });
+
   if (isExist.length == 0) {
     await Board.create({ title, author, password, contents, date });
   }
@@ -72,17 +73,21 @@ router.delete("/board/:boardId", async (req, res) => {
   }
 });
 
-//회원가입
+//회원가입;
 // router.post("/user", async (req, res) => {
 //   try {
-//     const { email, password1, password2 } = req.body;
+//     const { nickname, password } = req.body;
 
-//     if (password1 !== password2) {
-//       res.send({ result: "fail" });
-//     } else {
-//       await User.create({ email, password1, password2 });
+//     const existsUsers = await User.findOne({
+//       $or: [{ password }, { nickname }],
+//     });
+//     if (existsUsers) {
+//       // NOTE: 보안을 위해 인증 메세지는 자세히 설명하지 않는것을 원칙으로 한다: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html#authentication-responses
+//       res.status(400).send({
+//         errorMessage: "이메일 또는 닉네임이 이미 사용중입니다.",
+//       });
+//       return;
 //     }
-//     res.send({ result: "success" });
 //   } catch (err) {
 //     console.error(err);
 //     netx();
@@ -91,7 +96,8 @@ router.delete("/board/:boardId", async (req, res) => {
 
 // //로그인
 // const jwt = require("jsonwebtoken");
-// router.put("/user", async (req, res) => {
+
+// router.post("/user", async (req, res) => {
 //   const user = await user.findOne({ email });
 
 //   if (!user || passowrd !== user.password) {
@@ -105,4 +111,5 @@ router.delete("/board/:boardId", async (req, res) => {
 //     token: jwt.sign({ userId: user.userId }, "my-secret-key"),
 //   });
 // });
+
 module.exports = router;

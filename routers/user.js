@@ -1,39 +1,40 @@
 const express = require("express");
-const router = express.Router();
 const User = require("../schemas/user");
+const router = express.Router();
 
 //회원가입
 router.post("/user", async (req, res) => {
   const { nickname, password } = req.body;
 
-  // email or nickname이 동일한게 이미 있는지 확인하기 위해 가져온다.
-  Users = await User.find({ nickname });
+  //  nickname이 동일한게 이미 있는지 확인
+  exist = await User.find({ nickname });
 
-  if (Users.length == 0) {
-    await User.create({ nickname, password });
-
-    res.send({ result: "success" });
-  } else {
+  if (exist.length > 0) {
     res.send({ result: "fail" });
+  } else {
+    await User.create({ nickname, password });
+    res.send({ result: "success" });
   }
 });
 
-//로그인
-// const jwt = require("jsonwebtoken");
+//로그인;
+const jwt = require("jsonwebtoken");
 
-// router.put("/user", async (req, res) => {
-//   const user = await user.findOne({ email });
+router.post("/user", async (req, res) => {
+  const { nickname, password } = req.body;
 
-//   if (!user || passowrd !== user.password) {
-//     res.status(400).send({
-//       errorMessage: "이메일 또는 비밀번호가 틀려습니다.",
-//     });
-//     return;
-//   }
+  user = await User.findOne({ nickname });
 
-//   res.send({
-//     token: jwt.sign({ userId: user.userId }, "my-secret-key"),
-//   });
-// });
+  // NOTE: 인증 메세지는 자세히 설명하지 않는것을 원칙으로 한다: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html#authentication-responses
+  if (!user || password !== user.password) {
+    res.send({ result: "fail" });
+  } else {
+    res.send({ result: "success" });
+  }
+
+  res.send({
+    token: jwt.sign({ userId: user.userId }, "stella-key"),
+  });
+});
 
 module.exports = router;

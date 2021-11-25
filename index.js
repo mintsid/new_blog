@@ -4,15 +4,16 @@ const port = 3000;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.static("public"));
 
 const connect = require("./schemas");
 connect();
 
-const boardRouter = require("./routers/board");
-app.use("/api", [boardRouter]);
-
 const userRouter = require("./routers/user");
 app.use("/api", [userRouter]);
+
+const boardRouter = require("./routers/board");
+app.use("/api", [boardRouter]);
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
