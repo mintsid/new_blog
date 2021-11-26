@@ -17,18 +17,17 @@
 
         $.ajax({
           type: "POST",
-          url: `/api/user`,
+          url: `/api/user/login`,
           data: {
             nickname: nickname,
             password: password,
           },
           success: function (response) {
-            if (response.result == "success") {
-              alert("확인완료");
-              location.href = "/";
-            } else {
-              alert("오타확인좀 ");
-            }
+            localStorage.setItem("token", response.token);
+            window.location.href = "/";
+          },
+          error: function (error) {
+            customAlert(error.responseJSON.errorMessage);
           },
         });
       }
