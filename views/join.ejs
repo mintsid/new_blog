@@ -16,19 +16,16 @@
         let nickname = $("#nickname").val();
         let password = $("#password").val();
         let password1 = $("#password1").val();
-
-        if (password !== password1) {
-          alert("패스워드가 일치하지 않습니다.");
-          return;
-        }
+        let email = $("#email").val();
 
         $.ajax({
           type: "post",
-          url: `/api/login`,
+          url: `/api/user`,
           data: {
             nickname: nickname,
             password: password,
-            password1: password1,
+            confirmPassword: password1,
+            email: email,
           },
           success: function (response) {
             customAlert("회원가입을 축하드립니다!", function () {
@@ -46,6 +43,18 @@
   </head>
   <body>
     <p><label>닉네임:</label><input type="text" id="nickname" /></p>
+    <p></p>
+    <p>
+      <label>email:</label
+      ><input
+        type="email"
+        id="email"
+        required
+        pattern=".+@globex\.com"
+        size="30"
+        required
+      />
+    </p>
     <p>
       <span> 비밀번호: <input type="text" id="password" /></span>
     </p>

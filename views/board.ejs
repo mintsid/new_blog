@@ -36,7 +36,7 @@
       $(document).ready(function () {
         // 토큰이 있을 경우 로그인 기능 hide
         if (localStorage.getItem("token")) {
-          getSelf(function () {
+          (function () {
             $("#logout").show();
             $("#login").hide();
           });

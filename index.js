@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-// const authMiddleware = require("./middlewares/auth-middleware");
+const authMiddleware = require("./middlewares/auth-middleware");
+const Joi = require("joi");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

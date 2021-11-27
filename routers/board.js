@@ -31,11 +31,11 @@ router.get("/board", async (req, res, next) => {
 
 //저장
 router.post("/board", async (req, res) => {
-  const { title, author, contents, date } = req.body;
+  const { title, contents, author, date } = req.body;
   isExist = await Board.find({ title });
 
   if (isExist.length == 0) {
-    await Board.create({ title, author, contents, date });
+    await Board.create({ title, contents, author, date });
   }
   res.send({ result: "success" });
 });

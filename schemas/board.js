@@ -9,7 +9,7 @@ const boardSchema = new Schema({
   password: {
     type: String,
     required: false,
-    unique: true,
+    unique: false,
   },
   author: {
     type: String,
